@@ -563,7 +563,7 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#acceptance-criteria">7.1.1. Acceptance criteria</a></li>
 <li><a href="#non-functional-requirements">7.1.2. Non-functional requirements</a></li>
-<li><a href="#bonus-features">7.1.3. Bonus features</a></li>
+<li><a href="#api-design">7.1.3. API Design</a></li>
 </ul>
 </li>
 </ul>
@@ -1491,17 +1491,7 @@ Which will be reviewed, and feedback provided, by bol.com engineers.</p>
 (think jars and properties)</p>
 </li>
 <li>
-<p><code>decisions.txt</code> containing:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>all (design) decisions, with reasonings</p>
-</li>
-<li>
-<p>instructions on how to execute your project</p>
-</li>
-</ul>
-</div>
+<p><code>decisions.txt</code> containing all (design) decisions, with reasonings</p>
 </li>
 </ul>
 </div>
@@ -1575,8 +1565,10 @@ sleep more or do both (inconclusive due to insufficient data for analyses)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Customers are able to register for a price drop.
-Customers are identified by their email address</p>
+<p>Customers are able to register for a price drop.</p>
+</li>
+<li>
+<p>Customers are identified by their email address</p>
 </li>
 <li>
 <p>When the price drops below a given threshold,
@@ -1620,12 +1612,16 @@ So the component your team will build should fit in that landscape</p>
 therefore the new service must be built using Java 8</p>
 </li>
 <li>
-<p>There are two backend services you will need to talk to (stubs are provided):</p>
+<p>There are three backend services you will need to talk to (stubs are provided):</p>
 <div class="ulist">
 <ul>
 <li>
 <p>The 'Product Service' which will have an API call to get the price of a certain product.
 A product is identified by an EAN (European Article Number)</p>
+</li>
+<li>
+<p>The 'Customer Service' which will have an API call to get customer information (name, email)
+A customer is identified by an internal customerId</p>
 </li>
 <li>
 <p>The 'Messaging Service' which will have an API call to send an email to the customer</p>
@@ -1675,36 +1671,62 @@ must be written in a <code>decisions.txt</code> file</p>
 even for the same customer and the same product,
 without causing any data inconsistencies.
 Data inconsistencies that pop up during testing are unacceptable and will fail the project</p>
-<div class="ulist">
-<ul>
+</li>
+<li>
+<p><strong>(Important!)</strong> Test that your application will never return a 500+ ServerError.</p>
+</li>
 <li>
 <p>The frontend is built by another team.
 Your focus is on writing a backend REST service.
-The design of the frontend API is a given</p>
-</li>
-</ul>
-</div>
+Since the frontend application is already done, the API calls that is makes to your service are also a given.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="bonus-features">7.1.3. Bonus features</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>(Optionally)</strong> For testing or demo purposes you can write a frontend for your service.
-This frontend must not be part of the <code>server.jar</code>.
-Instead of that it will be named <code>frontend.jar</code> and the browse-url must be <a href="http://localhost:80/" class="bare">http://localhost:80/</a>.
-Clear instructions must be included in the <code>decisions.txt</code> file</p>
-</li>
-<li>
-<p><strong>(Optionally)</strong> You are allowed to store the results on disk.
-The database file should be named <code>server.db</code>.
-Data must then be read and written using the <code>java.io.RandomAccessFile</code> class.
-Please note that this could be an extra risk in regards to data (in)consistency&#8230;&#8203;</p>
-</li>
-</ul>
+<h4 id="api-design">7.1.3. API Design</h4>
+<div class="paragraph">
+<p>The model for your API is described in the 'price-notification-service.xsd' file.</p>
+</div>
+<div class="paragraph">
+<p>The frontend will do the following calls to your service:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Method        : GET
+Path          : /v1/customer/{customerId}/notifications
+Accept        : application/xml
+Status 200    : Returns a NotificationList object containing a list of active Notifications that haven't been fired.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Functionality : Retrieves all the notifications for the customer with the given customerId.
+The functionality will always return with a list. Even if there are no notifications configured for the customer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Method        : PUT
+Path          : /v1/customer/{customerId}/notifications/{ean}
+Body          : A Notification object containing the ean, the price.
+Content-Type  : application/xml
+Status 201    : Operation successful, returns nothing</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Functionality : Create or update notifications for products (eans).
+If there is already a notification available for the given ean, then that notification will be updated.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Method        : DELETE
+Path          : /v1/customer/{customerId}/notifications/{ean}
+Body          : None
+Status 204    : Notification succesfully deleted.
+Status 404    : No notification can be found with for the customer with this ean</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Functionality : Deletes the notification for the customer with the given ean</p>
 </div>
 </div>
 </div>

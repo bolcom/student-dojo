@@ -39,7 +39,7 @@ asciidoctor {
             }
             exclude '**/*.adoc'
         }
-        into project.name
+        into projectDir.name
     }
     outputDir = file(asciidoctorOutputDir)
 
@@ -57,7 +57,7 @@ asciidoctor {
 asciidoctor.doLast {
     copy {
         // put index.html in the root of the docs
-        from("$asciidoctorOutputDir/html5/$project.name") {
+        from("$asciidoctorOutputDir/html5/${projectDir.name}") {
             include '**/index.html'
             includeEmptyDirs false
             eachFile { FileCopyDetails details ->
@@ -68,7 +68,7 @@ asciidoctor.doLast {
     }
     copy {
         // put the images directory in the root of the docs
-        from("$asciidoctorOutputDir/html5/$project.name/src/docs/asciidoc") {
+        from("$asciidoctorOutputDir/html5/${projectDir.name}/src/docs/asciidoc") {
             include 'images/**/*'
             include '**/*.pdf'
             includeEmptyDirs false
