@@ -1,5 +1,12 @@
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.bol.productservice.ProductServiceApplication'
+run {
+    args 'server', 'src/dist/productservice.yaml'
+}
 
 dependencies {
+    compile 'io.dropwizard:dropwizard-core:1.1.0'
     testCompile 'junit:junit:4.12'
 }

@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'com.bol.customerservice.customerserviceApplication'
+mainClassName = 'com.bol.customerservice.CustomerServiceApplication'
 run {
     args 'server', 'src/dist/customerservice.yaml'
 }
