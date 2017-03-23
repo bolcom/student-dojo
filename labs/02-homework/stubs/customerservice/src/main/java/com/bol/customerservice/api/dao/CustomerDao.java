@@ -41,7 +41,7 @@ public class CustomerDao {
         // 50% chance the call takes longer then expected
         if (behaviourIndex < 5) {
             try {
-                Thread.sleep(behaviourIndex * 5000);
+                Thread.sleep(behaviourIndex * 10000);
             } catch (InterruptedException e) {
                 throw new IllegalStateException("Unable to perform method.");
             }
