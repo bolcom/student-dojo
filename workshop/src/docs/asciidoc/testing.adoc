@@ -1,0 +1,61 @@
+= Testing
+
+image::test-pyramid.png[caption="Test Pyramid - ", title="https://martinfowler.com/bliki/TestPyramid.html"]
+
+For a quick introduction into testing,
+check this video at:
+https://www.lynda.com/Developer-Programming-Foundations-tutorials/What-kind-testing/124398/137958-4.html[What kind of testing?]
+from lynda.com
+
+== Test-Driven Development
+
+Test-Driven Development,
+or TDD for short.
+
+A quick introduction from lynda.com:
+https://www.lynda.com/Developer-Programming-Foundations-tutorials/What-TDD/124398/137959-4.html[What is TDD?]
+
+=== Three laws of TDD
+
+1. Write *no* production code,
+   except to pass a failing test
+2. Write only __enough__ of a test
+   to demonstrate a failure
+3. Write only __enough__ production code
+   to pass the test
+
+=== Red-Green-Refactor
+
+image::tdd-red_green_refactor.jpg[role="right"]
+
+Red/Green/Refactor,
+http://blog.cleancoder.com/uncle-bob/2014/12/17/TheCyclesOfTDD.html[the minute-by-minute micro-cycle to TDD].
+
+This cycle is typically executed once for every complete unit test,
+or once every dozen or so cycles of the three laws.
+The rules of this cycle are simple.
+
+1. Create a unit tests that fails
+2. Write production code that makes that test pass
+3. Clean up the mess you just made
+
+The philosophy is based on the idea that our limited minds are not
+capable of pursuing the two simultaneous goals of all software systems:
+
+1. Correct behavior
+2. Correct structure
+
+So the Red/Green/Refactor cycle tells us to first focus on making the
+software work correctly;
+and then, and only then,
+to focus on giving that working software a long-term survivable structure.
+
+Executing the Red/Green/Refactor cycle takes on the order of a minute or so.
+This is the granularity of refactoring.
+Refactoring is not something you do at the end of the project;
+it’s something you do on a __minute-by-minute__ basis.
+There is no task on the project plan that says: Refactor.
+There is no time reserved at the end of the project,
+or the iteration, or the day, for refactoring.
+Refactoring is a continuous in-process activity,
+not something that is done late (and therefore optionally).

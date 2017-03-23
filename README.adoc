@@ -1,0 +1,29 @@
+= Students Dojo in Java
+
+A workshop for students organized by bol.com
+
+During an afternoon at the bol.com office,
+high-school students,
+with basic Java programming knowledge,
+will do a kata and receive a homework assignment.
+
+The purpose of the kata is to learn some Clean Code principles,
+TDD, and refactoring.
+
+The purpose of the homework assignment is to give the students an idea of a real assignment,
+in a simplified context/architecture.
+Which will be reviewed, and feedback provided, by bol.com engineers.
+
+== Building this project
+
+The only prerequisite is that you have JDK 7 or higher installed.
+
+After cloning the project,
+type `./gradlew build` (Windows: `gradlew build`).
+All build dependencies,
+including [Gradle](http://www.gradle.org) itself,
+will be downloaded automatically (unless already present).
+
+For generating the workshop html (incl. Github Pages),
+type `./gradlew asciidoctor` (Windows: `gradlew asciidoctor`).
+The html is updated in the `docs/` directory.

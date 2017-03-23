@@ -1,0 +1,56 @@
+= Introduction
+
+Welcome to the Code Dojo for Students workshop `(ʘ‿ʘ)╯`
+
+So what is "Dojo" thing?::
++
+"Dojo (道場 dōjō) is a Japanese term which literally means "place of the way".
+Initially, dōjōs were adjunct to temples."
+-- https://en.wikipedia.org/wiki/Dojo
+
+During a Code Dojo commonly koans and katas are practised.
+Say what?
+
+Koans::
+"a paradoxical anecdote or riddle without a solution,
+used in Zen Buddhism to demonstrate the inadequacy of logical reasoning and provoke enlightenment."
+-- https://en.wikipedia.org/wiki/K%C5%8Dan
++
+These are exercises that are complete,
+but miss a snippet of code to make it run successful.
+It's up to you to provide the snippet and make it succeed.
+These exercises are very good to learn specific rules and syntax of a programming language.
+
+Katas::
+"an individual training exercise in karate and other martial arts"
+-- https://en.wikipedia.org/wiki/Kata
++
+These are exercises where there is only a problem description,
+the exercise is to implement a solution.
+You can (and should) implement and re-implement katas many times.
+This will give you the practise of solving different type of problems,
+and every time you solve it again you will become quicker and better at it.
+These exercises are also perfect to learn new programming languages,
+or new features of programming languages.
+eg. by implementing a kata in Java 6, Java 7, Java 8, Scala, Ruby, Groovy, etc.
+You'll quickly learn the specifics of each of the languages.
+
+This Code Dojo you'll practise a kata in the Java programming language.
+During this kata you'll learn and apply some techniques to get to Clean Code.
+
+Clean Code?::
++
+image::cleancoders-logo.png[caption="Clean Coders - ", title="https://cleancoders.com", role="right"]
++
+Let me introduce you to Robert C. Martin,
+aka Uncle Bob,
+the writer of the books
+https://www.bol.com/nl/p/clean-code/1001004006133271/[Clean Code]
+and https://www.bol.com/nl/p/the-clean-coder/1001004011182718/[The Clean Coder],
+and the creator of the
+https://cleancoders.com[Clean Coders]
+video series.
+In his books and videos he shows you principles that help you write clean code.
+Some may seem extreme,
+some may seem obvious,
+but overall you'll benefit from having seen his vision on clean code.

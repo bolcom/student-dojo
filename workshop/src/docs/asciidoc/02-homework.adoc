@@ -1,0 +1,23 @@
+= Homework
+
+The purpose of this homework assignment is to give you an idea of a real assignment,
+in a simplified context/architecture.
+Which will be reviewed, and feedback provided, by bol.com engineers.
+
+Requirements for this homework assignment:
+
+* Work in a team of 2 - 4 people
+* In a single zip-file, deliver:
+** All code for your project
+** All executable, distributable versions of your project +
+   (think jars and properties)
+** `decisions.txt` containing:
+*** all (design) decisions, with reasonings
+*** instructions on how to execute your project
+* Deliver the zip-file to your teacher,
+  he/she will do the communication with bol.com for the review and feedback
+
+Good luck! `ᕙ(░ಥ╭͜ʖ╮ಥ░)━☆ﾟ.*･｡ﾟ ᕕ( ᐛ )ᕗ`
+
+//== Lab 2: Project Price Alert
+include::../../../../labs/02-homework/README.adoc[leveloffset=+1]

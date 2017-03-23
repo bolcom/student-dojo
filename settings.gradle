@@ -1,0 +1,18 @@
+include 'workshop'
+include 'labs/01-legacy-code'
+include 'labs/02-homework'
+
+rootProject.name = 'student-dojo'
+
+rootProject.children.each { project ->
+    String fileBaseName = project.name
+    project.projectDir = new File(settingsDir, fileBaseName)
+    assert project.projectDir.isDirectory()
+
+    def buildFileName = "${fileBaseName}.gradle"
+    project.buildFileName = buildFileName.split('/').last()
+    if (!project.buildFile.isFile()) {
+        project.buildFileName = 'build.gradle'
+    }
+    assert project.buildFile.isFile()
+}

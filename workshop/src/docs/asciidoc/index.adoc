@@ -1,0 +1,84 @@
+= Students Dojo in Java
+:toclevels: 5
+:imagesdir: ./images
+
+The purpose of this workshop,
+is to give you hands-on experience with the Java language
+and insight on how to write Clean Code.
+Through a mix of
+short videos,
+small exercises
+and bits of theory,
+you'll experience the Java language,
+solving problems in a Test-Driven(-Development, TDD) manner,
+using plain Java.
+
+And a homework assignment which will be reviewed,
+and feedback provided, by bol.com engineers.
+
+== Pre-requisites
+
+- Know the Java language, eg. you've followed a basic Java course +
++
+NOTE: The labs may contain references to more info,
+      and you might learn a thing or two about the Java language,
+      but this workshop won't learn you Java if you haven't got any previous knowledge
+
+- Have Java 8+ JDK installed and available on your `PATH` +
++
+----
+$ java -version
+java version "1.8.0_121"
+Java(TM) SE Runtime Environment (build 1.8.0_121-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
+$ javac -version
+javac 1.8.0_121
+----
+
+== How does this workshop work?
+
+The workshop organization is as following:
+
+* First a bit of theory explaining the concepts, principles,
+  practices and conventions.
+  Then a lab to bring the theory to practise
+* Each lab is self-contained,
+  but continues on the knowledge you gained in previous labs
+* Labs contain additional practical information which you
+  need to be able to do the lab exercises
+* Labs often contain references to resources.
+  These resources provide you with more in-depth information on how things work
+* Each lab explains where you can find the files for the lab.
+  All lab files are structured inside the `labs` directory
+
+WARNING: https://www.wanderlustworker.com/the-importance-of-failure-5-valuable-lessons-from-failing/[Learning is in the failing until you succeed]
+
+//== Introduction
+include::./introduction.adoc[leveloffset=+1]
+
+== Get the code
+
+This project is available at Github: https://github.com/bolcom/student-dojo
+
+If you have `git` installed, you can clone it right away:
+
+----
+git clone git@github.com:bolcom/student-dojo.git
+----
+
+Else,
+you can find out how to install and use `git` at https://git-scm.com/doc
+
+Or download the repository as zip from: https://github.com/bolcom/student-dojo/archive/master.zip
+
+//== Testing
+include::./testing.adoc[leveloffset=+1]
+
+//== Legacy Code
+include::./01-legacy-code.adoc[leveloffset=+1]
+
+//== Homework
+include::./02-homework.adoc[leveloffset=+1]
+
+//== Appendix
+include::./appendix.adoc[leveloffset=+1]

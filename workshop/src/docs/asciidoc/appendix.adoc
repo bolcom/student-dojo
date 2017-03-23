@@ -1,0 +1,82 @@
+= Appendix
+
+== Build tools
+
+image::gradle-logo.png[link="https://gradle.org", width=300, role="right"]
+
+This workshop uses https://gradle.org[Gradle] as its build tool.
+
+Another common build tool in the Java world,
+is https://maven.apache.org[Maven].
+
+== IDEs
+
+- http://www.jetbrains.com[IntelliJ] +
+  Very popular all-round IDE.
+  There's a (free) community edition,
+  but as student you can get the ultimate edition for free.
+- https://eclipse.org[Eclipse]
+- https://netbeans.org[Netbeans]
+
+== Meetups
+
+image::meetup-logo.svg[link="http://meetup.com", width=300, role="right"]
+
+http://meetup.com[Meetup.com] has a big amount of free IT related meetups, knowledge sharing sessions;
+commonly in the evening between 18:00 and 21:00,
+~two presentations,
+free food and drinks included,
+all over the netherlands (but most are around Amsterdam). +
+Perfect to learn about real IT projects, usage,
+latest hypes, technologies,
+and to learn other people in the business.
+
+Just sign-up, choose your IT topics of interest,
+and go to the suggested meetups.
+
+Some known high-quality meetups,
+possibly with specific topics:
+
+- https://www.meetup.com/bol-com-techlab/ +
+  blog: https://techlab.bol.com +
+  videos: https://www.youtube.com/channel/UCacHAxEx5RzwKu_WFjxKPIA
+- https://www.meetup.com/DomCode/
+- https://www.meetup.com/golang-amsterdam/
+- https://www.meetup.com/Software-Circus/ +
+  videos: https://www.youtube.com/channel/UC9rxWtgVUFls4LocQhXoNJA
+- https://www.meetup.com/Continuous-Delivery-Amsterdam/ +
+  videos: https://www.youtube.com/channel/UCiB_3TmZFc7WxFV4Cv54wTg
+- https://www.meetup.com/devops-engineers/
+- https://www.meetup.com/DevOpsAmsterdam/
+- https://www.meetup.com/virtualJUG/ +
+  videos: https://virtualjug.com
+- https://www.meetup.com/GOTO-Nights-Amsterdam/
+- https://www.meetup.com/DigitalOceanAmsterdam/
+- https://www.meetup.com/agileholland/
+- https://www.meetup.com/papers-we-love-amsterdam/
+
+== Conferences
+
+Conferences are knowledge sharing and networking events,
+ranging from a day, to multiple days, to a week.
+Some are free,
+some are expensive,
+most have student discounts.
+
+Here a short list of IT conferences,
+there are a lot more on any topic of your choice:
+
+- https://fosdem.org +
+  videos: https://video.fosdem.org
+- http://nextbuild.nl
+- https://gotoams.nl +
+  videos: https://www.youtube.com/user/GotoConferences
+- http://joyofcoding.org +
+  videos: https://www.infoq.com/joy-of-coding/
+- https://devoxx.com +
+  videos: https://www.youtube.com/channel/UCCBVCTuk6uJrN3iFV_3vurg/
+- https://voxxeddays.com +
+  videos: https://www.youtube.com/channel/UCFZ66zPdDvZ4KO3gkTduEig
+- http://www.thenextweb.com/conference/ +
+  videos: https://www.youtube.com/user/thenextweb
+- https://www.devopsdays.org

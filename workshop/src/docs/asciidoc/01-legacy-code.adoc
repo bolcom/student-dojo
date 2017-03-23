@@ -1,0 +1,219 @@
+= Legacy Code
+
+Code that does its thing,
+but is old and/or isn't up to par with the latest code guidelines and principles,
+is commonly marked as Legacy Code.
+The same goes for code that isn't covered by tests.
+
+When starting refactoring legacy code,
+we ask our selves some of the following questions:
+
+- Where to start?
+- If I start here will it cause problems later on?
+- I see 2-3 options, which one should I choose?
+
+First and foremost,
+find the smallest piece of code that you can start refactoring.
+For that piece,
+create unit tests which tests the boundaries and special cases.
+Then, start refactoring!
+Take very small steps,
+create additional tests when needed,
+and keep those tests green.
+
+To help refactoring towards clean code and object oriented concepts,
+there are the
+link:legacy-code/DevelopersAnonymous-ObjectCalisthenics.pdf[9 Object Calisthenics rules]:
+
+1. One level of indentation per method
+2. Don't use the `else` keyword
+3. Wrap all primitives and Strings
+4. First class collections (wrap all collections)
+5. One dot per line
+6. Don't abbreviate
+7. Keep all entities small
+8. No classes with more than two instance variables
+9. No getters/setters/properties
+
+These rules are good practise for all code,
+not only legacy code.
+
+Next, some tips to help you apply the 9 rules.
+
+== How to calculate the number of code dependencies
+
+.Given code sample
+[source,java,linenums]
+----
+places[currentPlayer] = places[currentPlayer] + diceResult;
+if (places[currentPlayer] > 11)
+    places[currentPlayer] = places[currentPlayer] - 12;
+----
+
+- Line 3 is the deepest nested code.
+  It has 2 dependencies, namely: `places` and `currentPlayer`
+- If we include line 2,
+  we still find 2 dependencies, namely: `places` and `currentPlayer`
+- If we include line 1,
+  we find 3 dependencies, namely: `places`, `currentPlayer`, and `diceResult`
+
+That's how you calculate the number of dependencies in a piece of code.
+
+== How to reduce the number of code dependencies
+
+=== Extract local variable
+
+.This code depends on `items` and `i`
+[source,java]
+----
+if (items.get(i).getQuality() > 0) {
+----
+
+.If we declare `item` above, the if statement has only one dependency: `item`
+[source,java]
+----
+Item item = items.get(i);
+
+if (item.getQuality() > 0) {
+----
+
+This is called the "extract local variable" refactoring.
+
+=== Invert `if`-statement
+
+.The code below has 2 dependencies: `quality` and `name`
+[source,java]
+----
+if (quality > 0) {
+    if (!name.equals("Sulfuras, Hand of Ragnaros")) {
+        quality = quality - 1;
+    }
+}
+----
+
+.By simply inverting the if statements, we’re able to group the instructions about quality
+[source,java]
+----
+if (!name.equals("Sulfuras, Hand of Ragnaros")) {
+    if (quality > 0) {
+        quality = quality - 1;
+    }
+}
+----
+
+This is called the "invert `if`-statement" refactoring.
+
+== Wrap integer with domain concept
+
+[source,java]
+----
+public class Discounter {
+    private int discount;
+
+    public int applyTo(int initialPrice) {
+        return initialPrice - discount;
+    }
+
+    // ...
+}
+----
+
+.Becomes
+[source,java]
+----
+public class Discounter {
+    private Money discount;
+
+    public Money applyTo(Money initialPrice) {
+        return initialPrice.minus(discount);
+    }
+
+    // ...
+}
+
+public class Money {
+    private int discountInCents;
+
+    // ...
+}
+----
+
+== How to get rid of `else`-statements
+
+=== Early Return
+
+[source,java]
+----
+public boolean isValidEmail(String email) {
+    if (validFormat(email)) {
+        // do logic
+    } else {
+        return false;
+    }
+}
+----
+
+.Becomes
+[source,java]
+----
+public boolean isValidEmail(String email) {
+    if (!validFormat(email)) {
+        return false;
+    }
+    // do logic
+}
+----
+
+Returning from a method as soon as possible,
+keeps the code readable,
+focused on the actual logic,
+and minimally indented.
+
+=== Polymorphism
+
+Polymorphism is an alternative to `if`/`else`/`switch`-statements.
+For instance,
+it is possible to use the
+http://www.oodesign.com/strategy-pattern.html[Strategy Pattern]
+or inheritance to replace every clause in the control statement.
+
+There are variations to how the "right" strategy is obtained, eg.:
+
+* Caller provides the strategy (as a method argument)
+* Strategy is memorised as member variable
+* Strategy is obtained from a map (or any other lookup mechanism)
+
+=== Null Object, Optional, or Empty list
+
+A Null Object is an object with no referenced value or with defined neutral (`null`) behavior.
+
+The
+https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html[Java Optional]
+, https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#emptyList()[Collections#emptyList()]
+, https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#emptyMap()[Collections#emptyMap()]
+, https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#emptySet()[Collections#emptySet()]
+, https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#emptyListIterator()[Collections#emptyListIterator()]
+, and https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html#emptyEnumeration()[Collections#emptyEnumeration()]
+, are all implementations of the Null Object provided by the Java language.
+
+Using Null Object dramatically reduces the need for `null` checking.
+
+.Example without Optional
+[source,java]
+----
+SoundCard soundcard = ...;
+if(soundcard != null){
+  System.out.println(soundcard);
+}
+----
+
+.Example with Optional
+[source,java]
+----
+Optional<Soundcard> soundcard = ...;
+soundcard.ifPresent(System.out::println);
+----
+
+
+//== Lab 1: Legacy Code
+include::../../../../labs/01-legacy-code/README.adoc[leveloffset=+1]
