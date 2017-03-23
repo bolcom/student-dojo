@@ -16,7 +16,7 @@ Which will be reviewed, and feedback provided, by bol.com engineers.
 
 == Building this project
 
-The only prerequisite is that you have JDK 7 or higher installed.
+The only prerequisite is that you have JDK 8 installed.
 
 After cloning the project,
 type `./gradlew build` (Windows: `gradlew build`).

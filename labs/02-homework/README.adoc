@@ -34,7 +34,7 @@ Your team has been assigned to create a technical solution for this opportunity.
 == Acceptance criteria
 
 * Customers are able to register for a price drop.
-  Customers are identified by their email address
+* Customers are identified by their email address
 * When the price drops below a given threshold,
   an email is send out to the customer.
 ** The email will contain the new price and a link to the product page
@@ -54,9 +54,11 @@ Your team has been assigned to create a technical solution for this opportunity.
   So the component your team will build should fit in that landscape
 * Most of the services at bol.com are written in Java,
   therefore the new service must be built using Java 8
-* There are two backend services you will need to talk to (stubs are provided):
+* There are three backend services you will need to talk to (stubs are provided):
 ** The 'Product Service' which will have an API call to get the price of a certain product.
   A product is identified by an EAN (European Article Number)
+** The 'Customer Service' which will have an API call to get customer information (name, email)
+  A customer is identified by an internal customerId
 ** The 'Messaging Service' which will have an API call to send an email to the customer
 * To decrease the footprint of our infrastructure,
   we are experimenting with running java applications stand-alone.
@@ -89,17 +91,41 @@ server.productservice.port=8280
   even for the same customer and the same product,
   without causing any data inconsistencies.
   Data inconsistencies that pop up during testing are unacceptable and will fail the project
-- The frontend is built by another team.
+* *(Important!)* Test that your application will never return a 500+ ServerError.
+* The frontend is built by another team.
   Your focus is on writing a backend REST service.
-  The design of the frontend API is a given
+  Since the frontend application is already done, the API calls that is makes to your service are also a given.
+  
+== API Design
 
-== Bonus features
+The model for your API is described in the 'price-notification-service.xsd' file.
 
-* *(Optionally)* For testing or demo purposes you can write a frontend for your service.
-  This frontend must not be part of the `server.jar`.
-  Instead of that it will be named `frontend.jar` and the browse-url must be http://localhost:80/.
-  Clear instructions must be included in the `decisions.txt` file
-* *(Optionally)* You are allowed to store the results on disk.
-  The database file should be named `server.db`.
-  Data must then be read and written using the `java.io.RandomAccessFile` class.
-  Please note that this could be an extra risk in regards to data (in)consistency...
+The frontend will do the following calls to your service:
+----
+Method        : GET
+Path          : /v1/customer/{customerId}/notifications
+Accept        : application/xml
+Status 200    : Returns a NotificationList object containing a list of active Notifications that haven't been fired.  
+----
+Functionality : Retrieves all the notifications for the customer with the given customerId. 
+The functionality will always return with a list. Even if there are no notifications configured for the customer.
+
+----
+Method        : PUT
+Path          : /v1/customer/{customerId}/notifications/{ean}
+Body          : A Notification object containing the ean, the price. 
+Content-Type  : application/xml 
+Status 201    : Operation successful, returns nothing
+----
+Functionality : Create or update notifications for products (eans). 
+If there is already a notification available for the given ean, then that notification will be updated.
+
+----
+Method        : DELETE 
+Path          : /v1/customer/{customerId}/notifications/{ean}
+Body          : None
+Status 204    : Notification succesfully deleted.
+Status 404    : No notification can be found with for the customer with this ean
+----
+Functionality : Deletes the notification for the customer with the given ean
+
