@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.bol.emailservice.EmailServiceApplication'
+run {
+    args 'server', 'src/dist/emailservice.yaml'
+}
+
+dependencies {
+    compile 'io.dropwizard:dropwizard-core:1.1.0'
+    testCompile 'junit:junit:4.12'
+}
