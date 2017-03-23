@@ -1,5 +1,30 @@
 = Lab 1: Refactoring legacy code
 
+In `labs/01-legacy-code` you can find the first lab.
+
+.Project structure
+----
+.
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── org
+│   │           └── joyofcoding
+│   │               └── objectcalisthenics
+│   │                   ├── GildedRose.java
+│   │                   └── Item.java
+│   └── test
+│       └── java
+│           └── org
+│               └── joyofcoding
+│                   └── objectcalisthenics
+│                       ├── assertions
+│                       │   └── ItemsAssert.java
+│                       └── GildedRoseTest.java
+├── 01-legacy-code.gradle
+└── README.adoc
+----
+
 The goal of this lab is to let you try out heuristics that allows
 to guide refactoring efforts towards clean code and object oriented concepts.
 

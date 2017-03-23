@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://config.services.bol.com/schemas/price-notification-service-2.0.xsd"
-	xmlns:pns="http://config.services.bol.com/schemas/price-notification-service-2.0.xsd"
-	elementFormDefault="qualified">
-	<xs:annotation>
-		<xs:documentation>
-			Model Descriptor for REST interface for the Price Notification Service.
-		</xs:documentation>
-	</xs:annotation>
-
+           targetNamespace="http://config.services.bol.com/schemas/price-notification-service-2.0.xsd"
+           xmlns:pns="http://config.services.bol.com/schemas/price-notification-service-2.0.xsd"
+           elementFormDefault="qualified">
+    <xs:annotation>
+        <xs:documentation>
+            Model Descriptor for REST interface for the Price Notification Service.
+        </xs:documentation>
+    </xs:annotation>
 
     <xs:complexType name="NotificationList">
         <xs:sequence>
             <xs:element name="notifications" type="pns:Notification" minOccurs="0" maxOccurs="unbounded"></xs:element>
         </xs:sequence>
     </xs:complexType>
-    
-	<xs:complexType name="Notification">
-		<xs:sequence>
-			<xs:element name="ean" minOccurs="1" maxOccurs="1" type="xs:string" />
-			<xs:element name="price" minOccurs="1" maxOccurs="1" type="xs:double" />
-		</xs:sequence>
-	</xs:complexType>
 
-
+    <xs:complexType name="Notification">
+        <xs:sequence>
+            <xs:element name="ean" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            <xs:element name="price" minOccurs="1" maxOccurs="1" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

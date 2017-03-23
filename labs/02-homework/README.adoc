@@ -31,12 +31,81 @@ our Business Analysts have come to the conclusion that if we offer a price-drop 
 
 Your team has been assigned to create a technical solution for this opportunity.
 
+In `labs/02-homework` you can find the homework lab.
+
+.Project structure
+----
+.
+├── stubs
+│   ├── customerservice
+│   │   ├── src
+│   │   │   ├── dist
+│   │   │   │   └── customerservice.yaml
+│   │   │   └── main
+│   │   │       └── java
+│   │   │           └── com
+│   │   │               └── bol
+│   │   │                   └── customerservice
+│   │   │                       ├── api
+│   │   │                       │   └── Customer.java
+│   │   │                       ├── health
+│   │   │                       │   └── V1ApiHealthCheck.java
+│   │   │                       ├── jdbi
+│   │   │                       │   └── CustomerDao.java
+│   │   │                       ├── resources
+│   │   │                       │   └── CustomerServiceResource.java
+│   │   │                       ├── CustomerServiceApplication.java
+│   │   │                       └── CustomerServiceConfiguration.java
+│   │   └── customerservice.gradle
+│   ├── emailservice
+│   │   ├── src
+│   │   │   ├── dist
+│   │   │   │   └── emailservice.yaml
+│   │   │   └── main
+│   │   │       └── java
+│   │   │           └── com
+│   │   │               └── bol
+│   │   │                   └── emailservice
+│   │   │                       ├── api
+│   │   │                       │   └── Email.java
+│   │   │                       ├── health
+│   │   │                       │   └── V1ApiHealthCheck.java
+│   │   │                       ├── resources
+│   │   │                       │   └── EmailServiceResource.java
+│   │   │                       ├── EmailServiceApplication.java
+│   │   │                       └── EmailServiceConfiguration.java
+│   │   └── emailservice.gradle
+│   └── productservice
+│       ├── src
+│       │   ├── dist
+│       │   │   └── productservice.yaml
+│       │   └── main
+│       │       └── java
+│       │           └── com
+│       │               └── bol
+│       │                   └── productservice
+│       │                       ├── api
+│       │                       │   └── Product.java
+│       │                       ├── health
+│       │                       │   └── V1ApiHealthCheck.java
+│       │                       ├── jdbi
+│       │                       │   └── ProductDao.java
+│       │                       ├── resources
+│       │                       │   └── ProductServiceResource.java
+│       │                       ├── ProductServiceApplication.java
+│       │                       └── ProductServiceConfiguration.java
+│       └── productservice.gradle
+├── 02-homework.gradle
+├── price-notification-service.xsd
+└── README.adoc
+----
+
 == Acceptance criteria
 
-* Customers are able to register for a price drop.
+* Customers are able to register for a price drop
 * Customers are identified by their email address
 * When the price drops below a given threshold,
-  an email is send out to the customer.
+  an email is send out to the customer
 ** The email will contain the new price and a link to the product page
 ** The email is only sent to the customer once,
    even if the price raises and drops below the threshold again
@@ -53,81 +122,222 @@ Your team has been assigned to create a technical solution for this opportunity.
   https://martinfowler.com/articles/microservices.html[microservice architecture].
   So the component your team will build should fit in that landscape.
   Also take into account that some services may act up by throwing server errors at you,
-  reponding slow or may not be available at all. Write your code defensively.
+  responding slow or may not be available at all. Write your code defensively
 * Most of the services at bol.com are written in Java,
   therefore the new service must be built using Java 8
 * There are three backend services you will need to talk to (stubs are provided):
 ** The 'Product Service' which will have an API call to get the price of a certain product.
   A product is identified by an EAN (European Article Number)
 ** The 'Customer Service' which will have an API call to get customer information (name, email)
-  A customer is identified by an internal customerId. 
-** The 'Messaging Service' which will have an API call to send an email to the customer
+  A customer is identified by an internal customerId
+** The 'Email Service' which will have an API call to send an email to the customer
 * To decrease the footprint of our infrastructure,
   we are experimenting with running java applications stand-alone.
-  Therefore the result of your project should be a jar file which can be run with the command:
-+
-----
-java -jar server.jar
-----
-* Your application should be configurable using a properties file (`server.properties`)
-  that resides in the same directory as the jar file.
-  These properties must be used to configure the listening port of your service,
-  and where it can find its dependencies.
-  So the properties file should at least contain the following entries:
-+
-----
-server.port=8080
-
-server.emailservice.host=localhost
-server.emailservice.port=8180
-
-server.productservice.host=localhost
-server.productservice.port=8280
-----
+  Therefor the result of your project should be a stand-alone java application,
+  which is runnable via single command
+  (eg. `java -jar server.jar`, or `./my-service`)
+* Your service should be configurable using a configuration file (eg. `.properties` or `.yaml`). +
+  The following things should be configurable:
+** The port your service API is available on
+** The host and port for each service your service is dependent on
 * For this version of the service it can be non-persistent.
   So it will be sufficient to store the results in memory
-* *(Important!)* All (design) decisions you take,
-  with reasonings,
-  must be written in a `decisions.txt` file
-* *(Important!)* The service must be able to handle concurrent API calls,
+* The project must have a `README` file, containing:
+** Instructions on how to build, and run, your service
+** All (design) decisions you take,
+  with reasonings
+* The service must be able to handle concurrent API calls,
   even for the same customer and the same product,
   without causing any data inconsistencies.
   Data inconsistencies that pop up during testing are unacceptable and will fail the project
-* *(Important!)* Test that your application will never return a 500+ ServerError.
+* Test that your service will never return a 500+ ServerError
 * The frontend is built by another team.
   Your focus is on writing a backend REST service.
-  Since the frontend application is already done, the API calls that is makes to your service are also a given.
-  
+  Your service API contract is already defined,
+  as given in <<api-design>>
+
+[[api-design]]
 == API Design
 
-The model for your API is described in the 'price-notification-service.xsd' file.
+=== Price notification Service
+
+The model for your API is described in the `price-notification-service.xsd` file.
 
 The frontend will do the following calls to your service:
-----
-Method        : GET
-Path          : /v1/customer/{customerId}/notifications
-Accept        : application/xml
-Status 200    : Returns a NotificationList object containing a list of active Notifications that haven't been fired.  
-----
-Functionality : Retrieves all the notifications for the customer with the given customerId. 
-The functionality will always return with a list. Even if there are no notifications configured for the customer.
 
-----
-Method        : PUT
-Path          : /v1/customer/{customerId}/notifications/{ean}
-Body          : A Notification object containing the ean, the price. 
-Content-Type  : application/xml 
-Status 201    : Operation successful, returns nothing
-----
-Functionality : Create or update notifications for products (eans). 
-If there is already a notification available for the given ean, then that notification will be updated.
+[%autowidth.spread,cols="h,d"]
+|===
+|Method
+|`GET`
 
-----
-Method        : DELETE 
-Path          : /v1/customer/{customerId}/notifications/{ean}
-Body          : None
-Status 204    : Notification succesfully deleted.
-Status 404    : No notification can be found with for the customer with this ean
-----
-Functionality : Deletes the notification for the customer with the given ean
+|Path
+|`/v1/customer/{customerId}/notifications`
 
+|Accept
+|`application/xml`
+
+|Status 200
+|Returns a NotificationList object containing a list of active Notifications that haven't been fired
+
+|Functionality
+|Retrieves all the notifications for the customer with the given customerId.
+The functionality will always return with a list,
+even if there are no notifications configured for the customer
+|===
+
+[%autowidth.spread,cols="h,d"]
+|===
+|Method
+|`PUT`
+
+|Path
+|`/v1/customer/{customerId}/notifications/{ean}`
+
+|Body
+|A Notification object containing the ean, and the price
+
+|Content-Type
+|`application/xml`
+
+|Status 201
+|Operation successful, returns nothing
+
+|Functionality
+|Create or update notifications for products (eans).
+If there is already a notification available for the given ean,
+then that notification will be updated
+|===
+
+[%autowidth.spread,cols="h,d"]
+|===
+|Method
+|`DELETE`
+
+|Path
+|`/v1/customer/{customerId}/notifications/{ean}`
+
+|Body
+|None
+
+|Content-Type
+|`application/xml`
+
+|Status 204
+|Notification successfully deleted
+
+|Status 404
+|No notification can be found for the customer with this ean
+
+|Functionality
+|Deletes the notification for the customer with the given ean
+|===
+
+=== Customer service
+
+[%autowidth.spread,cols="h,d"]
+|===
+|Method
+|`GET`
+
+|Path
+|`/v1/customer/`
+
+|Content-Type
+|`application/xml`
+
+|Status 200
+|Returns a CustomerList object containing a list of Customer objects
+
+|Functionality
+|Retrieves all customers.
+The functionality will always return with a list,
+even if there are no customers
+|===
+
+[%autowidth.spread,cols="h,d"]
+|===
+|Method
+|`GET`
+
+|Path
+|`/v1/customer/{customerNumber}`
+
+|Content-Type
+|`application/xml`
+
+|Status 200
+|Returns a Customer object
+
+|Status 404
+|Customer does not exist
+
+|Functionality
+|Returns the specific customer
+|===
+
+=== Email service
+
+[%autowidth.spread,cols="h,d"]
+|===
+|Method
+|`PUT`
+
+|Path
+|`/v1/email`
+
+|Body
+|An Email object containing the receiver' emailaddress,
+subject, and the body content
+
+|Content-Type
+|`application/xml`
+
+|Status 202
+|Operation successful, returns nothing
+
+|Functionality
+|Sents given email to receiver' emailaddress
+|===
+
+=== Product service
+
+[%autowidth.spread,cols="h,d"]
+|===
+|Method
+|`GET`
+
+|Path
+|`/v1/product/`
+
+|Content-Type
+|`application/xml`
+
+|Status 200
+|Returns a ProductList object containing a list of Product objects
+
+|Functionality
+|Retrieves all products.
+The functionality will always return with a list,
+even if there are no products
+|===
+
+[%autowidth.spread,cols="h,d"]
+|===
+|Method
+|`GET`
+
+|Path
+|`/v1/product/{ean}`
+
+|Content-Type
+|`application/xml`
+
+|Status 200
+|Returns a Product object
+
+|Status 404
+|Product does not exist
+
+|Functionality
+|Returns the specific product
+|===

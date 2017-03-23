@@ -563,7 +563,14 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel3">
 <li><a href="#acceptance-criteria">7.1.1. Acceptance criteria</a></li>
 <li><a href="#non-functional-requirements">7.1.2. Non-functional requirements</a></li>
-<li><a href="#api-design">7.1.3. API Design</a></li>
+<li><a href="#api-design">7.1.3. API Design</a>
+<ul class="sectlevel4">
+<li><a href="#price-notification-service">Price notification Service</a></li>
+<li><a href="#customer-service">Customer service</a></li>
+<li><a href="#email-service">Email service</a></li>
+<li><a href="#product-service">Product service</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1202,6 +1209,33 @@ soundcard.ifPresent(<span class="predefined-type">System</span>.out::println);</
 <div class="sect2">
 <h3 id="lab-1-refactoring-legacy-code">6.5. Lab 1: Refactoring legacy code</h3>
 <div class="paragraph">
+<p>In <code>labs/01-legacy-code</code> you can find the first lab.</p>
+</div>
+<div class="listingblock">
+<div class="title">Project structure</div>
+<div class="content">
+<pre>.
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── org
+│   │           └── joyofcoding
+│   │               └── objectcalisthenics
+│   │                   ├── GildedRose.java
+│   │                   └── Item.java
+│   └── test
+│       └── java
+│           └── org
+│               └── joyofcoding
+│                   └── objectcalisthenics
+│                       ├── assertions
+│                       │   └── ItemsAssert.java
+│                       └── GildedRoseTest.java
+├── 01-legacy-code.gradle
+└── README.adoc</pre>
+</div>
+</div>
+<div class="paragraph">
 <p>The goal of this lab is to let you try out heuristics that allows
 to guide refactoring efforts towards clean code and object oriented concepts.</p>
 </div>
@@ -1560,19 +1594,90 @@ sleep more or do both (inconclusive due to insufficient data for analyses)</p>
 <div class="paragraph">
 <p>Your team has been assigned to create a technical solution for this opportunity.</p>
 </div>
+<div class="paragraph">
+<p>In <code>labs/02-homework</code> you can find the homework lab.</p>
+</div>
+<div class="listingblock">
+<div class="title">Project structure</div>
+<div class="content">
+<pre>.
+├── stubs
+│   ├── customerservice
+│   │   ├── src
+│   │   │   ├── dist
+│   │   │   │   └── customerservice.yaml
+│   │   │   └── main
+│   │   │       └── java
+│   │   │           └── com
+│   │   │               └── bol
+│   │   │                   └── customerservice
+│   │   │                       ├── api
+│   │   │                       │   └── Customer.java
+│   │   │                       ├── health
+│   │   │                       │   └── V1ApiHealthCheck.java
+│   │   │                       ├── jdbi
+│   │   │                       │   └── CustomerDao.java
+│   │   │                       ├── resources
+│   │   │                       │   └── CustomerServiceResource.java
+│   │   │                       ├── CustomerServiceApplication.java
+│   │   │                       └── CustomerServiceConfiguration.java
+│   │   └── customerservice.gradle
+│   ├── emailservice
+│   │   ├── src
+│   │   │   ├── dist
+│   │   │   │   └── emailservice.yaml
+│   │   │   └── main
+│   │   │       └── java
+│   │   │           └── com
+│   │   │               └── bol
+│   │   │                   └── emailservice
+│   │   │                       ├── api
+│   │   │                       │   └── Email.java
+│   │   │                       ├── health
+│   │   │                       │   └── V1ApiHealthCheck.java
+│   │   │                       ├── resources
+│   │   │                       │   └── EmailServiceResource.java
+│   │   │                       ├── EmailServiceApplication.java
+│   │   │                       └── EmailServiceConfiguration.java
+│   │   └── emailservice.gradle
+│   └── productservice
+│       ├── src
+│       │   ├── dist
+│       │   │   └── productservice.yaml
+│       │   └── main
+│       │       └── java
+│       │           └── com
+│       │               └── bol
+│       │                   └── productservice
+│       │                       ├── api
+│       │                       │   └── Product.java
+│       │                       ├── health
+│       │                       │   └── V1ApiHealthCheck.java
+│       │                       ├── jdbi
+│       │                       │   └── ProductDao.java
+│       │                       ├── resources
+│       │                       │   └── ProductServiceResource.java
+│       │                       ├── ProductServiceApplication.java
+│       │                       └── ProductServiceConfiguration.java
+│       └── productservice.gradle
+├── 02-homework.gradle
+├── price-notification-service.xsd
+└── README.adoc</pre>
+</div>
+</div>
 <div class="sect3">
 <h4 id="acceptance-criteria">7.1.1. Acceptance criteria</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Customers are able to register for a price drop.</p>
+<p>Customers are able to register for a price drop</p>
 </li>
 <li>
 <p>Customers are identified by their email address</p>
 </li>
 <li>
 <p>When the price drops below a given threshold,
-an email is send out to the customer.</p>
+an email is send out to the customer</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1607,7 +1712,7 @@ for when they are no longer interested in the product</p>
 <a href="https://martinfowler.com/articles/microservices.html">microservice architecture</a>.
 So the component your team will build should fit in that landscape.
 Also take into account that some services may act up by throwing server errors at you,
-reponding slow or may not be available at all. Write your code defensively.</p>
+responding slow or may not be available at all. Write your code defensively</p>
 </li>
 <li>
 <p>Most of the services at bol.com are written in Java,
@@ -1623,10 +1728,10 @@ A product is identified by an EAN (European Article Number)</p>
 </li>
 <li>
 <p>The 'Customer Service' which will have an API call to get customer information (name, email)
-A customer is identified by an internal customerId.</p>
+A customer is identified by an internal customerId</p>
 </li>
 <li>
-<p>The 'Messaging Service' which will have an API call to send an email to the customer</p>
+<p>The 'Email Service' which will have an API call to send an email to the customer</p>
 </li>
 </ul>
 </div>
@@ -1634,29 +1739,22 @@ A customer is identified by an internal customerId.</p>
 <li>
 <p>To decrease the footprint of our infrastructure,
 we are experimenting with running java applications stand-alone.
-Therefore the result of your project should be a jar file which can be run with the command:</p>
-<div class="listingblock">
-<div class="content">
-<pre>java -jar server.jar</pre>
-</div>
-</div>
+Therefor the result of your project should be a stand-alone java application,
+which is runnable via single command
+(eg. <code>java -jar server.jar</code>, or <code>./my-service</code>)</p>
 </li>
 <li>
-<p>Your application should be configurable using a properties file (<code>server.properties</code>)
-that resides in the same directory as the jar file.
-These properties must be used to configure the listening port of your service,
-and where it can find its dependencies.
-So the properties file should at least contain the following entries:</p>
-<div class="listingblock">
-<div class="content">
-<pre>server.port=8080
-
-server.emailservice.host=localhost
-server.emailservice.port=8180
-
-server.productservice.host=localhost
-server.productservice.port=8280</pre>
-</div>
+<p>Your service should be configurable using a configuration file (eg. <code>.properties</code> or <code>.yaml</code>).<br>
+The following things should be configurable:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The port your service API is available on</p>
+</li>
+<li>
+<p>The host and port for each service your service is dependent on</p>
+</li>
+</ul>
 </div>
 </li>
 <li>
@@ -1664,71 +1762,313 @@ server.productservice.port=8280</pre>
 So it will be sufficient to store the results in memory</p>
 </li>
 <li>
-<p><strong>(Important!)</strong> All (design) decisions you take,
-with reasonings,
-must be written in a <code>decisions.txt</code> file</p>
+<p>The project must have a <code>README</code> file, containing:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Instructions on how to build, and run, your service</p>
 </li>
 <li>
-<p><strong>(Important!)</strong> The service must be able to handle concurrent API calls,
+<p>All (design) decisions you take,
+with reasonings</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The service must be able to handle concurrent API calls,
 even for the same customer and the same product,
 without causing any data inconsistencies.
 Data inconsistencies that pop up during testing are unacceptable and will fail the project</p>
 </li>
 <li>
-<p><strong>(Important!)</strong> Test that your application will never return a 500+ ServerError.</p>
+<p>Test that your service will never return a 500+ ServerError</p>
 </li>
 <li>
 <p>The frontend is built by another team.
 Your focus is on writing a backend REST service.
-Since the frontend application is already done, the API calls that is makes to your service are also a given.</p>
+Your service API contract is already defined,
+as given in <a href="#api-design">API Design</a></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="api-design">7.1.3. API Design</h4>
+<div class="sect4">
+<h5 id="price-notification-service">Price notification Service</h5>
 <div class="paragraph">
-<p>The model for your API is described in the 'price-notification-service.xsd' file.</p>
+<p>The model for your API is described in the <code>price-notification-service.xsd</code> file.</p>
 </div>
 <div class="paragraph">
 <p>The frontend will do the following calls to your service:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>Method        : GET
-Path          : /v1/customer/{customerId}/notifications
-Accept        : application/xml
-Status 200    : Returns a NotificationList object containing a list of active Notifications that haven't been fired.</pre>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Path</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/v1/customer/{customerId}/notifications</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Accept</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/xml</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 200</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a NotificationList object containing a list of active Notifications that haven&#8217;t been fired</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Functionality</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves all the notifications for the customer with the given customerId.
+The functionality will always return with a list,
+even if there are no notifications configured for the customer</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PUT</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Path</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/v1/customer/{customerId}/notifications/{ean}</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Body</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A Notification object containing the ean, and the price</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/xml</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 201</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operation successful, returns nothing</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Functionality</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create or update notifications for products (eans).
+If there is already a notification available for the given ean,
+then that notification will be updated</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETE</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Path</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/v1/customer/{customerId}/notifications/{ean}</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Body</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/xml</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 204</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notification successfully deleted</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 404</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No notification can be found for the customer with this ean</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Functionality</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Deletes the notification for the customer with the given ean</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+<div class="sect4">
+<h5 id="customer-service">Customer service</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Path</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/v1/customer/</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/xml</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 200</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a CustomerList object containing a list of Customer objects</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Functionality</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves all customers.
+The functionality will always return with a list,
+even if there are no customers</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Path</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/v1/customer/{customerNumber}</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/xml</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 200</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a Customer object</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 404</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Customer does not exist</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Functionality</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the specific customer</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="paragraph">
-<p>Functionality : Retrieves all the notifications for the customer with the given customerId.
-The functionality will always return with a list. Even if there are no notifications configured for the customer.</p>
+<div class="sect4">
+<h5 id="email-service">Email service</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PUT</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Path</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/v1/email</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Body</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An Email object containing the receiver' emailaddress,
+subject, and the body content</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/xml</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 202</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operation successful, returns nothing</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Functionality</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sents given email to receiver' emailaddress</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>Method        : PUT
-Path          : /v1/customer/{customerId}/notifications/{ean}
-Body          : A Notification object containing the ean, the price.
-Content-Type  : application/xml
-Status 201    : Operation successful, returns nothing</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Functionality : Create or update notifications for products (eans).
-If there is already a notification available for the given ean, then that notification will be updated.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Method        : DELETE
-Path          : /v1/customer/{customerId}/notifications/{ean}
-Body          : None
-Status 204    : Notification succesfully deleted.
-Status 404    : No notification can be found with for the customer with this ean</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Functionality : Deletes the notification for the customer with the given ean</p>
+<div class="sect4">
+<h5 id="product-service">Product service</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Path</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/v1/product/</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/xml</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 200</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a ProductList object containing a list of Product objects</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Functionality</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retrieves all products.
+The functionality will always return with a list,
+even if there are no products</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GET</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Path</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/v1/product/{ean}</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Content-Type</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>application/xml</code></p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 200</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a Product object</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Status 404</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Product does not exist</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Functionality</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the specific product</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
