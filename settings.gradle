@@ -5,6 +5,7 @@ rootProject.name = 'student-dojo'
         'labs/02-homework',
         'labs/02-homework/stubs/emailservice',
         'labs/02-homework/stubs/productservice',
+        'labs/02-homework/stubs/customerservice',
 ].each { projectPath ->
     def projectName = "${projectPath.split('/').last()}"
     include projectName
