@@ -51,14 +51,16 @@ Your team has been assigned to create a technical solution for this opportunity.
 
 * At bol.com we have a
   https://martinfowler.com/articles/microservices.html[microservice architecture].
-  So the component your team will build should fit in that landscape
+  So the component your team will build should fit in that landscape.
+  Also take into account that some services may act up by throwing server errors at you,
+  reponding slow or may not be available at all. Write your code defensively.
 * Most of the services at bol.com are written in Java,
   therefore the new service must be built using Java 8
 * There are three backend services you will need to talk to (stubs are provided):
 ** The 'Product Service' which will have an API call to get the price of a certain product.
   A product is identified by an EAN (European Article Number)
 ** The 'Customer Service' which will have an API call to get customer information (name, email)
-  A customer is identified by an internal customerId
+  A customer is identified by an internal customerId. 
 ** The 'Messaging Service' which will have an API call to send an email to the customer
 * To decrease the footprint of our infrastructure,
   we are experimenting with running java applications stand-alone.

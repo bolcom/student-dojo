@@ -10,11 +10,7 @@ import io.dropwizard.setup.Environment;
 
 public class ProductServiceApplication extends Application<ProductServiceConfiguration> {
     public static void main(String[] args) throws Exception {
-        if (args.length == 0) {
-            new ProductServiceApplication().run(new String[] { "server", "src/dist/productservice.yaml" });
-        } else {
-            new ProductServiceApplication().run(args);
-        }
+        new ProductServiceApplication().run(args);
 
     }
 

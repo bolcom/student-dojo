@@ -10,11 +10,7 @@ import io.dropwizard.setup.Environment;
 
 public class CustomerServiceApplication extends Application<CustomerServiceConfiguration> {
     public static void main(String[] args) throws Exception {
-        if (args.length == 0) {
-            new CustomerServiceApplication().run(new String[] { "server", "src/dist/customerservice.yaml" });
-        } else {
-            new CustomerServiceApplication().run(args);
-        }
+        new CustomerServiceApplication().run(args);
 
     }
 
