@@ -1,18 +1,9 @@
 package com.bol.emailservice.api;
 
 public class Email {
-    private String customerId;
     private String emailAddress;
-    private String ean;
-    private double price;
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
+    private String subject;
+    private String body;
 
     public String getEmailAddress() {
         return emailAddress;
@@ -22,19 +13,19 @@ public class Email {
         this.emailAddress = emailAddress;
     }
 
-    public String getEan() {
-        return ean;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setEan(String ean) {
-        this.ean = ean;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    public double getPrice() {
-        return price;
+    public String getBody() {
+        return body;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setBody(String body) {
+        this.body = body;
     }
 }
