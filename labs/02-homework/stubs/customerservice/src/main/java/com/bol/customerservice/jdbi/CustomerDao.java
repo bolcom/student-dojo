@@ -1,20 +1,21 @@
-package com.bol.customerservice.api.dao;
+package com.bol.customerservice.jdbi;
+
+import com.bol.customerservice.api.Customer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import com.bol.customerservice.api.Customer;
-
 public class CustomerDao {
-
-    private final List<Customer> customers;
-    private Random random;
+    private final List<Customer> customers = new ArrayList<>();
+    private final Random random = new Random();
 
     public CustomerDao() {
-        random = new Random();
-        customers = new ArrayList<>();
+        initializeStubCustomers();
+    }
+
+    private void initializeStubCustomers() {
         customers.add(new Customer(100000L, "Mario", "Mario", "mario@mario.com"));
         customers.add(new Customer(300005L, "Luigi", "Mario", "luigi@mario.com"));
         customers.add(new Customer(500015L, "Princess", "Peaches", "princesspeachconspiracy@nintendo.com"));
@@ -23,16 +24,16 @@ public class CustomerDao {
     }
 
     public Optional<Customer> getCustomer(Long customerNumber) {
-        return behaviour(customers.stream()
+        return randomlyFail(customers.stream()
                 .filter(customer -> customer.getCustomerNumber().equals(customerNumber))
                 .findFirst());
     }
 
     public List<Customer> getCustomers() {
-        return behaviour(new ArrayList<>(customers));
+        return randomlyFail(new ArrayList<>(customers));
     }
 
-    private <T> T behaviour(T t) {
+    private <T> T randomlyFail(T t) {
         int behaviourIndex = random.nextInt(10);
         // 20% chance the call fails
         if (behaviourIndex < 2) {
@@ -49,5 +50,4 @@ public class CustomerDao {
         // 80% chance that what is asked for is actually returned.
         return t;
     }
-
 }

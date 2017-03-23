@@ -1,29 +1,21 @@
-package com.bol.customerservice.resource;
-
-import java.util.List;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response.Status;
+package com.bol.customerservice.resources;
 
 import com.bol.customerservice.api.Customer;
-import com.bol.customerservice.api.dao.CustomerDao;
+import com.bol.customerservice.jdbi.CustomerDao;
 import com.codahale.metrics.annotation.Timed;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
+import java.util.List;
 
 @Path("/v1")
 @Produces(MediaType.APPLICATION_XML)
 @Consumes(MediaType.APPLICATION_XML)
 public class CustomerServiceResource {
-
     private final CustomerDao customerDao;
 
     public CustomerServiceResource(CustomerDao customerDao) {
-
         this.customerDao = customerDao;
     }
 
@@ -38,6 +30,7 @@ public class CustomerServiceResource {
     @Path("customer/{customerNumber}")
     @Timed
     public Customer getCustomer(@PathParam("customerNumber") Long customerNumber) {
-        return customerDao.getCustomer(customerNumber).orElseThrow(() -> new WebApplicationException(Status.NOT_FOUND));
+        return customerDao.getCustomer(customerNumber)
+                .orElseThrow(() -> new WebApplicationException(Status.NOT_FOUND));
     }
 }

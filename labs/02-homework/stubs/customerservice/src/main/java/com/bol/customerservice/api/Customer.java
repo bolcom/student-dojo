@@ -1,7 +1,6 @@
 package com.bol.customerservice.api;
 
 public class Customer {
-
     private final Long customerNumber;
     private final String firstName, lastName, emailAddress;
 
@@ -27,5 +26,4 @@ public class Customer {
     public String getEmailAddress() {
         return emailAddress;
     }
-
 }

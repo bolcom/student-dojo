@@ -1605,7 +1605,9 @@ for when they are no longer interested in the product</p>
 <li>
 <p>At bol.com we have a
 <a href="https://martinfowler.com/articles/microservices.html">microservice architecture</a>.
-So the component your team will build should fit in that landscape</p>
+So the component your team will build should fit in that landscape.
+Also take into account that some services may act up by throwing server errors at you,
+reponding slow or may not be available at all. Write your code defensively.</p>
 </li>
 <li>
 <p>Most of the services at bol.com are written in Java,
@@ -1621,7 +1623,7 @@ A product is identified by an EAN (European Article Number)</p>
 </li>
 <li>
 <p>The 'Customer Service' which will have an API call to get customer information (name, email)
-A customer is identified by an internal customerId</p>
+A customer is identified by an internal customerId.</p>
 </li>
 <li>
 <p>The 'Messaging Service' which will have an API call to send an email to the customer</p>
