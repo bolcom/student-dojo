@@ -150,6 +150,7 @@ In `labs/02-homework` you can find the homework lab.
   without causing any data inconsistencies.
   Data inconsistencies that pop up during testing are unacceptable and will fail the project
 * The project must have a `README` file, containing:
+** Team composition
 ** Instructions on how to build, and run, your service
 ** All (design) decisions you take,
   with reasonings  
