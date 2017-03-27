@@ -1,13 +1,18 @@
 package com.bol.productservice.resources;
 
-import com.bol.productservice.api.Product;
-import com.bol.productservice.jdbi.ProductDao;
-import com.codahale.metrics.annotation.Timed;
-
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
-import java.util.List;
+
+import com.bol.productservice.api.Product;
+import com.bol.productservice.api.ProductList;
+import com.bol.productservice.jdbi.ProductDao;
+import com.codahale.metrics.annotation.Timed;
 
 @Path("/v1")
 @Produces(MediaType.APPLICATION_XML)
@@ -22,8 +27,10 @@ public class ProductServiceResource {
     @GET
     @Path("product")
     @Timed
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public ProductList getProducts() {
+        ProductList productList = new ProductList();
+        productList.setProducts(productDao.getProducts());
+        return productList;
     }
 
     @GET
