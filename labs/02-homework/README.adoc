@@ -142,7 +142,7 @@ In `labs/02-homework` you can find the homework lab.
 ** The host and port for each service your service is dependent on
 * Changes must be persistent - so if you restart your service any previously registered notifications
   will still be available. 
-** Since there is only network storage available you need to store your data in a file called 'service.db'. 
+** Your service needs to store its data in a file called 'service.db'. 
 ** Data should be read and written using Java's 'java.io.RandomAccessFile'.
 ** Any sql/jdbc solutions are out of scope for this project  
 * The service must be able to handle concurrent API calls,
