@@ -106,7 +106,9 @@ In `labs/02-homework` you can find the homework lab.
 * Customers are identified by their email address
 * When the price drops below a given threshold,
   an email is send out to the customer
-** The email will contain the new price and a link to the product page
+** The email will contain the new price and a link to the product page. 
+ Links to the productpage are formatted like this:
+ `https://www.bol.com/nl/p/{title}/{ean}/`
 ** The email is only sent to the customer once,
    even if the price raises and drops below the threshold again
 * Customers are able to create notifications for different products,
