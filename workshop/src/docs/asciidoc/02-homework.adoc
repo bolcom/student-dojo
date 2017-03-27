@@ -11,7 +11,7 @@ Requirements for this homework assignment:
 ** All code for your project
 ** All executable, distributable versions of your project +
    (think jars and configuration)
-** `decisions.txt` containing all (design) decisions, with reasonings
+** `README` containing all (design) decisions, with reasonings
 * Deliver the zip-file to your teacher,
   he/she will do the communication with bol.com for the review and feedback
 
