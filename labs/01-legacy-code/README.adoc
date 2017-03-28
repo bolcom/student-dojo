@@ -56,9 +56,13 @@ First an introduction to our system:
 However, as usual, the original developers have left and there’s no reliable document about the business rules.
 You’ll have to go with the code...
 
-NOTE: Luckily there are basic unit-test.
+NOTE: Luckily there are basic unit-tests.
       The tests make sure the application works as it should,
-      and therefor *should not be touched during the refactoring*.
+      and therefor *should functionally not be changed during refactoring*.
+      Of course, when you rename/move methods,
+      you'll have to update the test code accordingly,
+      but *functionally* it should not change.
+
 
 == Exercise 1: Move code to existing objects
 

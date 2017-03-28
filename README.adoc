@@ -2,6 +2,8 @@
 
 A workshop for students organized by bol.com
 
+View the workshop at: https://bolcom.github.io/student-dojo/
+
 During an afternoon at the bol.com office,
 high-school students,
 with basic Java programming knowledge,

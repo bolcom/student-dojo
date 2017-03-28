@@ -35,8 +35,15 @@ link:legacy-code/DevelopersAnonymous-ObjectCalisthenics.pdf[9 Object Calisthenic
 8. No classes with more than two instance variables
 9. No getters/setters/properties
 
+More info around these rules can be found at: http://williamdurand.fr/2013/06/03/object-calisthenics/
+
 These rules are good practise for all code,
 not only legacy code.
+
+NOTE: These 9 Object Calisthenics rules, are "rules".
+      In this lab the idea is that you apply these rules to the *max*,
+      but this doesn't mean you _can_ apply it everywhere.
+      There are situations where it simply doesn't make sense.
 
 Next, some tips to help you apply the 9 rules.
 
@@ -138,9 +145,33 @@ public class Money {
 }
 ----
 
+If the variable of your primitive type has *behaviors*,
+you MUST encapsulate it.
+And this is especially true for *Domain Driven Design* (DDD).
+DDD describes Value Objects like `Money`, or `Hour` for instance.
+
 == How to get rid of `else`-statements
 
+The `else` keyword is well-known as the `if`/`else` construct is built into nearly all programming languages.
+Do you remember the last time you saw a nested conditional?
+Did you enjoy reading it?
+I don’t think so,
+and that is exactly why it should be avoided.
+As it is so easy to add a new branch to the existing code than refactoring it to a better solution,
+you often end up with a really bad code.
+
+Here some ways to remove the `else` keyword from your code.
+
 === Early Return
+
+The condition can be either *optimistic*,
+meaning you have conditions for your error cases and the rest of your method follows the default scenario,
+or you can adopt a *defensive approach*
+(somehow related to https://en.wikipedia.org/wiki/Defensive_programming[Defensive Programming]),
+meaning you put the default scenario into a condition,
+and if it is not satisfied,
+then you return an error status.
+This is better as it prevents potential issues you didn’t think about.
 
 [source,java]
 ----
@@ -163,6 +194,10 @@ public boolean isValidEmail(String email) {
     // do logic
 }
 ----
+
+As an alternative,
+you can *introduce a variable* in order to make your *return statement parameterizable*.
+This is not always possible though.
 
 Returning from a method as soon as possible,
 keeps the code readable,
