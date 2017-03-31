@@ -2,7 +2,7 @@
 
 Welcome to the Code Dojo for Students workshop `(ʘ‿ʘ)╯`
 
-So what is "Dojo" thing?::
+So what is this "Dojo" thing?::
 +
 "Dojo (道場 dōjō) is a Japanese term which literally means "place of the way".
 Initially, dōjōs were adjunct to temples."

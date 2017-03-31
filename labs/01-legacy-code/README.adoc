@@ -149,3 +149,8 @@ that's the goal of these rules.
 WARNING: Especially rule 7, 8, and 9, are commonly seen as extreme.
          It's good to use them to the letter in learning situations,
          so you experience them to the best.
+
+== Resources
+
+- link:DevelopersAnonymous-ObjectCalisthenics.pdf[9 rules of Object Calisthenics]
+- link:http://williamdurand.fr/2013/06/03/object-calisthenics/
