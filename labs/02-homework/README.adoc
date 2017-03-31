@@ -126,7 +126,8 @@ In `labs/02-homework` you can find the homework lab.
   Also take into account that some services may act up by throwing server errors at you,
   responding slow or may not be available at all. Write your code defensively
 * Most of the services at bol.com are written in Java,
-  therefore the new service must be built using Java 8
+  we also have service written in atleast golang and scala, and possibly more.
+  But for this assignment you're limited to build your service using Java 8
 * There are three backend services you will need to talk to (The source code for the stubs is provided):
 ** The 'Product Service' which will have an API call to get the price of a certain product.
   A product is identified by an EAN (European Article Number)
