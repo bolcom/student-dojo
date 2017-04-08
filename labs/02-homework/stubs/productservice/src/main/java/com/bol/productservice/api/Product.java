@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class Product {
-    private final String ean;
+    private String ean;
     private String name;
     private BigDecimal suggestedRetailPrice, consumerPrice;
     private boolean available;
@@ -15,6 +15,9 @@ public class Product {
         this.suggestedRetailPrice = round(suggestedRetailPrice);
         this.consumerPrice = round(suggestedRetailPrice);
         this.available = true;
+    }
+
+    public Product() {
     }
 
     public String getName() {
@@ -43,6 +46,10 @@ public class Product {
 
     public String getEan() {
         return ean;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
     }
 
     public boolean isAvailable() {
