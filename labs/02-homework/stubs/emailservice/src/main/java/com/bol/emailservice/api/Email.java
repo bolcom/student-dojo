@@ -1,9 +1,16 @@
 package com.bol.emailservice.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Email {
     private final String emailAddress, subject, body;
 
-    public Email(String emailAddress, String subject, String body) {
+    @JsonCreator
+    public Email(
+            @JsonProperty("emailAddress") String emailAddress,
+            @JsonProperty("subject") String subject,
+            @JsonProperty("body") String body) {
         this.emailAddress = emailAddress;
         this.subject = subject;
         this.body = body;
