@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Email {
-    private final String emailAddress, subject, body;
+    private String emailAddress, subject, body;
 
     @JsonCreator
     public Email(
@@ -13,6 +13,21 @@ public class Email {
             @JsonProperty("body") String body) {
         this.emailAddress = emailAddress;
         this.subject = subject;
+        this.body = body;
+    }
+
+    public Email() {
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setBody(String body) {
         this.body = body;
     }
 
